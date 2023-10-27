@@ -2,10 +2,13 @@ package com.example.ch05.service;
 
 import com.example.ch05.domain.Article;
 import com.example.ch05.dto.AddArticleRequest;
+import com.example.ch05.dto.UpdateArticleRequest;
 import com.example.ch05.repository.BlogRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -14,5 +17,24 @@ public class BlogService {
 
     public Article save(AddArticleRequest request) {
         return blogRepository.save(request.toEntity());
+    }
+
+    public List<Article> findAll() {
+        return blogRepository.findAll();
+    }
+
+    public Article findById(long id) {
+        return blogRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+    }
+
+    public void delete(long id) {
+        blogRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found :"+ id));
+        article.update(request.getTitle(), request.getContent());
+        return article;
     }
 }

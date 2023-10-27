@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -18,6 +23,14 @@ public class Article {
     @Column(name="content", nullable = false)
     private String content;
 
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDateTime updateAt;
+
     /*
         Builder 어노테이션은 Lombok에서 지원하는 어노테이션
         생성자 위에 입력하면 빌더 패턴 방식으로 객체를 생성할 수 있어서 편리
@@ -30,6 +43,11 @@ public class Article {
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void update(String title, String cotnent) {
+        this.title = title;
+        this.content = cotnent;
     }
 
 }
