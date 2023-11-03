@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test
+    url: jdbc:h2:mem:testdb
     username: sa
-    password: "!Sekaowa1013"
+    password:
   jpa:
     show-sql: true
     properties:
