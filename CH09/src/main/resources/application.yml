@@ -11,6 +11,17 @@ spring:
     console:
       enabled: true
 
+      security:
+        oauth2:
+          client:
+            registration:
+              google:
+                client-id: 52700434993-tdmbl9e2rvrrkm11n1rc39oqba8vnsl7.apps.googleusercontent.com
+                client-secret: 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
+                scope:
+                  - email
+                  - profile
+
 jwt:
   issuer: zesthj@gmail.com
   secret_key: springboot-jwt
